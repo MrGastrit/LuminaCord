@@ -22,7 +22,10 @@ class UtilsCog(commands.Cog):
                     emj.append(emojis[i])
                     embed.add_field(name=f"{i + 1}. {option}", value="", inline=False)
 
-            message = await interaction.channel.send(embed=embed)
+            embed.add_field(name="", value=f"\nАвтор: {interaction.user.mention}")
+
+            await interaction.response.defer()
+            message = await interaction.followup.send(embed=embed)
 
             for emoji in emj:
                 await message.add_reaction(emoji)
